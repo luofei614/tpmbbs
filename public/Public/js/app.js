@@ -3,6 +3,23 @@ $(function(){
     //显示分类
     //监听分页
     //监听滑动
+      $('#menubar,#sidebar').on('swipeLeft',function(){
+         if(Modernizr.mq("(max-width:600px)")){
+           $(this).addClass('movetoleft');
+          }
+      }); 
+      $('#sidebar').on('swipeRight',function(){
+         if(Modernizr.mq("(max-width:600px)")){
+            $('#menubar').removeClass('movetoleft'); 
+           }
+      });
+      $('#content').on('swipeRight',function(){
+         if(Modernizr.mq("(max-width:600px)")){
+            $('#sidebar').removeClass('movetoleft');    
+          }
+      });
+
+
 });
 
 
