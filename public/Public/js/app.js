@@ -125,7 +125,29 @@ function add_article(){
         
 }
 
-//TODO 编辑文章
+
+
+function edit_article(){
+        var id=$('#edit_article_form').find('select[name="id"]').val();
+        var title=$('#edit_article_form').find('input[name="title"]').val();
+        var content=$('#edit_article_form').find('textarea[name="content"]').val();
+        var cat_id=$('#edit_article_form').find('select[name="cat_id"]').val();
+        var username=U.screenName;
+        var avatar=U.profileImageUrl;
+        var uid=U.mediaUserID;     
+        A.update(id,title,content,cat_id,uid,username,avatar).then(function(){
+            tpm_info('更新成功');
+            tpm_close_float_box();
+            show_article_list(cat_id);            
+        },function(error){
+            console.log(error);
+            tpm_alert('文章更新失败');
+        });
+        
+}
+
+
+
 function edit(id){
      if(!is_login){
         tpm_alert('请先登录');
@@ -223,10 +245,11 @@ function show_article_and_swipe(id){
 
 
 //删除文章
-function delete_article(id){
+function delete_article(cat_id,id){
     A.del(id).then(function(){
-       //TODO 刷新列表 
-    },function(){
+        show_article_list(cat_id);
+    },function(error){
+        console.log(error);
         tpm_alert('删除失败')  
     });
 }

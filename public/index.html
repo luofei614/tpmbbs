@@ -71,7 +71,11 @@
                 </div>
                 <div class="pull-left">
                     <h4>{$vo.title}</h4>
-                    <div class="c">{$vo.content}</div>
+                    <div class="c">{$vo.content} 
+                    <eq name="vo.uid" value="$U.mediaUserID">
+                        <a href="javascript:delete_article('{$vo.cat_id}','{$vo.id}')">删除</a>
+                    </eq> 
+                    </div>
                 </div>
             </li>
           </volist>
@@ -177,9 +181,10 @@
            选择板块：  
            <select name="cat_id"> 
                 <volist name="cats" id="vo">
-                <option value="{$key}">{$vo}</option>
+                     <option value="{$key}" <eq name="key" value="$data.cat_id">selected</eq>>{$vo}</option>
                 </volist>
            </select>
+            <input type="hidden" value="{$data.id}" name="id" />
              <input type="button" value="ok" onclick="edit_article()" /> 
         </form>
     </script>
