@@ -21,7 +21,7 @@ app.get('/search',function(req,res){
    query.find({success:function(articles){
        var ret=[];
         for(k in articles){
-            ret.push({'id':articles[k].id,title:articles[k].get('title'),avatar:'http://avosbbs.sinaapp.com/small.png'});
+            ret.push({'id':articles[k].id,title:articles[k].get('title'),avatar:articles[k].get('avatar')});
         } 
        res.send(JSON.stringify(ret));
    }});
