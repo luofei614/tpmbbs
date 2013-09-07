@@ -10,5 +10,21 @@ app.use(express.bodyParser());    // 读取请求body的中间件
 app.get('/hello', function(req, res) {
   res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
+
+app.get('/search',function(req,res){
+   var kw=req.query.kw;
+   var Article=AV.Object.extend('article');
+   var query = new AV.Query(Article);
+   var match=new RegExp(kw);
+   query.matches('title',match);
+   query.find({success:function(articles){
+       var ret=[];
+        for(k in articles){
+            ret.push({'id':articles[k].id,title:articles[k].get('title'),avatar:'http://avosbbs.sinaapp.com/small.png'});
+        } 
+       res.send(JSON.stringify(ret));
+   }});
+});
+
 //最后，必须有这行代码来使express响应http请求
 app.listen();
