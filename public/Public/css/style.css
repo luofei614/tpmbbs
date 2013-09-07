@@ -41,6 +41,11 @@ a.btn-weibo:hover,a.btn-qq:hover{ color:#fff; text-decoration:none;}
     #content{ width:100%; left:0;}
 }
 
+@media  (min-width:601px){
+    #menubar{ -webkit-transform:translateX(0);  }
+    #sidebar{ -webkit-transform:translateX(0);}
+}
+
 
 .article_list li{ border-bottom:1px dotted   #ccc;  margin:5px; padding:5px; }
 .article_list li .pull-left h4{ color:#5d5d5d; font-size:14px; font-weight:bold; font-family:"微软雅黑";}
