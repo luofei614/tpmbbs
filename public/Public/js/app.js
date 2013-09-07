@@ -1,5 +1,6 @@
 $(function(){
      window.is_login=false;
+     window.U={};
     $('#userinfo').html($('#userinfo_unlogin_tpl').html());
     //接受用户登陆信息
     $(window).on('message.userinfo',function(e){
@@ -79,11 +80,13 @@ $(function(){
 });
 
 function login_set(){
+    show_article_list(default_cat_id);
      var userinfo_html=TPM.parseTpl($('#userinfo_tpl').html(),{avatar:U.profileImageUrl,username:U.screenName});
      $('#userinfo').html(userinfo_html);
 }
 
 function loginout(){
+    show_article_list(default_cat_id);
     localStorage.removeItem('userdata');
     window.is_login=false;
     window.U='';
