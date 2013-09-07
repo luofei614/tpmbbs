@@ -79,3 +79,42 @@ function publish(){
     var html=TPM.parseTpl($('#publish_tpl').html(),{cats:cats});
     tpm_popurl(html,null,'发帖');
 }
+
+function add_article(){
+        var title=$('#add_article_form').find('input[name="title"]').val();
+        var content=$('#add_article_form').find('textarea[name="content"]').val();
+        var cat_id=$('#add_article_form').find('select[name="cat_id"]').val();
+        var username=U.screenName;
+        var avatar=U.profileImageUrl;
+        var uid=U.mediaUserID;     
+        A.add(title,content,cat_id,uid,username,avatar).then(function(){
+            tpm_info('发布成功');
+            tpm_close_float_box();
+            show_article_list(cat_id);            
+        },function(error){
+            console.log(error);
+            tpm_alert('文章发布失败');
+        });
+        
+}
+
+//TODO 编辑文章
+function edit(){
+
+}
+
+//获得用户信息
+
+function get_user_info(token,cb){
+    $.get('http://avosbbs.sinaapp.com/userinfo.php?token='+token,function(d){
+       try{
+       var obj=$.parseJSON(d);     
+       }catch(e){
+         tpm_alert('读取用户信息失败');
+         return ;
+       }
+       cb(obj);
+     }).fail(function(){
+        tpm_alert('网络有问题，读取用户信息失败');
+     });
+}
