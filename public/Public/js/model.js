@@ -61,4 +61,30 @@ var A=AV.Object.extend('article',{
 
         return d.promise();
     },
+    //获得某一篇文章
+    find:function(id){
+        var d=$.Deferred();
+        var query=new AV.Query('article');
+        query.get(id).then(function(article){
+            var ret={
+                id:article.id,
+                title:article.get('title'),
+                content:article.get('content'),
+                cat_id:article.get('cat_id'),
+                username:article.get('username'),
+                avatar:article.get('avatar'),
+                createdAt:article.createdAt
+            }
+            d.resolve(ret);
+        },function(error){
+            d.reject(error); 
+        });
+        return d.promise();
+    },
+    //删除文章
+    del:function(id){
+        var article=new A();
+        article.id=id;
+        return article.destroy();
+    }
 });
