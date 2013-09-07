@@ -81,4 +81,10 @@ var A=AV.Object.extend('article',{
         });
         return d.promise();
     },
+    //删除文章
+    del:function(id){
+        var article=new A();
+        article.id=id;
+        return article.destroy();
+    }
 });
