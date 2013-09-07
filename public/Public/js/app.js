@@ -118,3 +118,62 @@ function get_user_info(token,cb){
         tpm_alert('网络有问题，读取用户信息失败');
      });
 }
+
+
+
+//显示文章列表
+function show_article_list(cat_id,page){
+    $('#cat').find('.active').removeClass('active')
+    $('#cat_'+cat_id).addClass('active');
+    A.list(cat_id,page).then(function(d){
+        var totalPages=d.totalPages;
+        var page=d.page;
+        //渲染模板
+        var tpl_content=$('#article_list_tpl').html();
+        var html=TPM.parseTpl(tpl_content,{lists:d.lists});
+        if(page<=1){
+            $('#article_list').html(html); 
+        }else{
+            $('#article_list').append(html);
+        }
+        //判断是否显示加载更多按钮
+        if(page<totalPages){
+            //TODO加入分页按钮
+            $('#article_more').data('page',page+1);
+            $('#article_more').data('cat_id',cat_id);
+        }else{
+            $('#article_more').remove();
+        }
+
+    },function(error){
+        console.log(error)
+        tpm_alert('获得文章列表失败');
+    });
+}
+
+function show_article_list_and_swipe(cat_id,page){
+    show_article_list(cat_id,page);
+    if(Modernizr.mq('(max-width:600px)')){
+        $('#menubar').trigger('swipeLeft');
+    }
+}
+
+
+//显示某一篇文章
+function show_article(id){
+    A.find(id).then(function(d){
+        //TODO 渲染模板
+    },function(){
+        tpm_alert('文章获取失败');
+    })
+}
+
+
+//删除文章
+function delete_article(id){
+    A.del(id).then(function(){
+       //TODO 刷新列表 
+    },function(){
+        tpm_alert('删除失败')  
+    });
+}
