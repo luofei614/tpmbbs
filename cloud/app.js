@@ -12,6 +12,7 @@ app.get('/hello', function(req, res) {
 });
 
 app.get('/search',function(req,res){
+    /*
    var kw=req.query.kw;
    var Article=AV.Object.extend('article');
    var query = new AV.Query(Article);
@@ -22,8 +23,11 @@ app.get('/search',function(req,res){
         for(k in articles){
             ret.push({'id':articles[k].id,title:articles[k].get('title'),avatar:'http://avosbbs.sinaapp.com/small.png'});
         } 
-       res.send(JSON.stringify(ret));
-   }});
+       //res.send(JSON.stringify(ret));
+       */
+      
+   //}});
+    res.send('hello');
 });
 
 //最后，必须有这行代码来使express响应http请求
