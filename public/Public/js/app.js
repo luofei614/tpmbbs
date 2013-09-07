@@ -126,8 +126,23 @@ function add_article(){
 }
 
 //TODO 编辑文章
-function edit(){
-
+function edit(id){
+     if(!is_login){
+        tpm_alert('请先登录');
+        return ;
+    }
+     //读取文章内容
+    A.find(id).then(function(d){
+        if(d.uid!=U.mediaUserID){
+            tpm_alert('您没有权限编辑此文章');
+            return ;
+        }
+        var html=TPM.parseTpl($('#edit_tpl').html(),{cats:cats,data:d});
+        tpm_popurl(html,null,'修改文章');
+    },function(error){
+        console.log(error);
+        tpm_alert('获得文章失败');
+    });
 }
 
 //获得用户信息

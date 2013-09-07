@@ -155,7 +155,7 @@
  </div>
 </script>
 
-    <script id="publish_tpl" type="text/html">
+  <script id="publish_tpl" type="text/html">
         <form id="add_article_form" method="post"> 
            标题： <input type="text" name="title" value="" /> <br />
            内容：<textarea name="content"></textarea><br />
@@ -168,5 +168,23 @@
              <input type="button" value="ok" onclick="add_article()" /> 
         </form>
     </script>
+
+
+  <script id="edit_tpl" type="text/html">
+        <form id="edit_article_form" method="post"> 
+           标题： <input type="text" name="title" value="{$data.title}" /> <br />
+           内容：<textarea name="content">{$data.content}</textarea><br />
+           选择板块：  
+           <select name="cat_id"> 
+                <volist name="cats" id="vo">
+                <option value="{$key}">{$vo}</option>
+                </volist>
+           </select>
+             <input type="button" value="ok" onclick="edit_article()" /> 
+        </form>
+    </script>
+
+
+
 </body>
 </html>
