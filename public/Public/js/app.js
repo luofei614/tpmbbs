@@ -61,3 +61,21 @@ $(function(){
 
   
 });
+
+
+//绑定账户
+function login(platform){
+       tpm_popurl('http://open.denglu.cc/transfer/'+platform+'?appid=6914dengeKU1ETIll7NeIKI7vaxrk6',null,'账号登陆');
+}
+
+
+//发布文章的弹出框
+
+function publish(){
+    if(!is_login){
+        tpm_alert('请先登录');
+        return ;
+    }
+    var html=TPM.parseTpl($('#publish_tpl').html(),{cats:cats});
+    tpm_popurl(html,null,'发帖');
+}
