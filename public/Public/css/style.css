@@ -25,3 +25,43 @@ body{
 
 #menubar .copyright {color#b0c4d9; font-size:12px; position:absolute; left:50px;  bottom:15px;}
 
+
+
+.movetoleft{-webkit-transform:translateX(-110%);}
+
+
+.btn-weibo{ display:inline-block; padding:3px 5px;  background:#e45857; border:1px solid #c14142; width:70px; text-align:center; border-radius:3px; color:#fff;}
+.btn-qq{ display:inline-block; padding:3px 5px;  background:#81c13d; border:1px solid #4d7721; width:70px; text-align:center; border-radius:3px; color:#fff;}
+a.btn-weibo:hover,a.btn-qq:hover{ color:#fff; text-decoration:none;}
+
+
+@media  (max-width:600px){
+    #menubar{ width:100%;  }
+    #sidebar{ width:100%; left:0; }
+    #content{ width:100%; left:0;}
+}
+
+
+.article_list li{ border-bottom:1px dotted   #ccc;  margin:5px; padding:5px; }
+.article_list li .pull-left h4{ color:#5d5d5d; font-size:14px; font-weight:bold; font-family:"微软雅黑";}
+.article_list li .pull-right img{ border-radius:10000px; width:50px; height:50px;} 
+.article_list li .pull-right { font-size:12px; color:#5d5d5d; text-align:center;} 
+.article_list li .pull-left .c{ color:#666;}
+.article_list li:nth-child(even){ background:#eee; }
+
+.article_list li.active {background:#54728c;}
+.article_list li.active .pull-left h4,.article_list li.active .pull-right{color:#fff}
+.article_list li.active .pull-left .c{ color:#b0c4d9;}
+
+
+#content{ padding:5px;}
+
+#content .article_content .c{ padding:10px; color:#333; margin-bottom:10px;}
+#content .article_content .article_header{ position:relative; height:60px;}
+#content .article_content .article_header h4{ position:absolute; left:0px; height:50px; line-height:50px; margin:0; padding:0; padding-left:10px; color:#000; font-size:16px; right:60px; }
+#content .article_content .article_header h4 .line1{ height:3px; background:#3fb5e7; width:126px; position:absolute; left:0; bottom:0px;}
+#content .article_content .article_header h4 .line2{ height:3px; background:#efefef;  position:absolute; left:126px; right:0px; bottom:0px;}
+#content .article_content .article_header .avatar{ position:absolute; right:0px; text-align:center; color:#5d5d5d;} 
+#content .article_content .article_header .avatar img{  width:50px; height:50px; border-radius:100000px; }
+#content .article_content .userinfo{ text-align:right;}
+

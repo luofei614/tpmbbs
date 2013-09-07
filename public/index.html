@@ -27,10 +27,6 @@
 <body>
    <div id="menubar">
         <div id="userinfo"  class="userinfo">
-            <img src="./logo.png" width="140" height="140"  />
-            <div class="name">TPMBBS</div>
-            <a href="javascript:login('sina')" class="btn-weibo">微博登陆</a>
-            <a href="javascript:login('qzone')" class="btn-qq">QQ登陆</a>
         </div>
         <script id="userinfo_tpl" type="text/html">
             <img src="{$avatar}"  />
@@ -68,7 +64,7 @@
           暂时没有内容
        <else />
         <volist name="lists" id="vo">
-            <li class="clearfix">
+            <li class="clearfix" id="li_{$vo.id}" onclick="show_article_and_swipe('{$vo.id}')">
                 <div class="pull-right">
                     <img src="{$vo.avatar}" width="50" height="50" /><br />
                     {$vo.username}
@@ -85,34 +81,31 @@
        </script>
    </div> 
    <div id="content">
-       <div class="article_content">
-           <div class="article_header">
-                <h4>
-                    标题
-                    <div class="line1"></div>
-                    <div class="line2"></div>
-                </h4>
-               <div class="avatar"> 
-                   <img src="./avatar.png" alt="用户名" /><br /> 
-                   luofei614
-               </div>   
-            </div>
 
-            <div class="c">
-                内容
-                内容
-                内容
-                内容
-                内容
-                内容
-               <br />
-              <div class="userinfo">作者：用户名 ， 时间：2013-9-2</div>
-            </div>
-            <div>
-                <iframe src="http://bbs.avosapps.com/comment.html?id=1&title=xsdf" width="100%" height="1000px" frameborder="0"></iframe>  
-            </div>
-       </div>
-   </div> 
+   </div><!--/#content--> 
+<script id="content_tpl" type="text/html">
+ <div class="article_content">
+    <div class="article_header">
+        <h4>
+            {$title}
+            <div class="line1"></div>
+            <div class="line2"></div>
+        </h4>
+       <div class="avatar"> 
+           <img src="{$avatar}" alt="{$username}" /><br /> 
+           {$username}
+       </div>   
+    </div>
+    <div class="c">
+          {$content} 
+      <div class="userinfo"> 时间：{$datetime}</div>
+    </div>
+    <div>
+        <iframe src="http://bbs.avosapps.com/comment.html?id={$id}&title={$title}" width="100%" height="1000px" frameborder="0"></iframe>  
+    </div>
+ </div>
+</script>
+
     <script id="publish_tpl" type="text/html">
         <form id="add_article_form" method="post"> 
            标题： <input type="text" name="title" value="" /> <br />
