@@ -1,7 +1,6 @@
 // 在Cloud code里初始化express框架
 var express = require('express');
-var app = express();
-
+var app=express();
 // App全局配置
 app.set('views','cloud/views');   //设置模板目录
 app.set('view engine', 'ejs');    // 设置template引擎
