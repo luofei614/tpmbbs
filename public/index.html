@@ -11,62 +11,120 @@
     <script src="./Public/js/modernizr.js" type="text/javascript"></script>
     <script src="./Public/js/TPMmodal.js" type="text/javascript"></script>
     <script src="./Public/js/touch.js" type="text/javascript"></script>
-	<script src="./Public/js/av.js" type="text/javascript"></script>
 	<script src="./Public/js/TPM.js" type="text/javascript"></script>
+	<script src="./Public/js/av.js" type="text/javascript"></script>
+    <script src="./Public/js/config.js" type="text/javascript"></script>
+    <script src="./Public/js/model.js" type="text/javascript"></script>
+    <script src="./Public/js/datetime.js" type="text/javascript"></script>
     <script src="./Public/js/app.js" type="text/javascript"></script>
     <script>
-
-    $(function(){
-         show_article_list();
-        //TODO 获得localStorage 中的token ， 判断是否登陆
-        //接受用户信息
-        $(window).on('message.userinfo',function(e){
-            var data=e.originalEvent.data;
-            if('object'==$.type(data) && data.token){
-                localStorage.setItem('token',data.token);
-                get_user_info(data.token,function(d){
-                 $('#userinfo').html(d.screenName);
-                });         
-            }
-        })
-      
-        $('#add_article').on('submit',function(e){
-             e.preventDefault();
-             add_article($('#title').val(),$('#content').val(),$('#cat_id').val(),function(article){
-                //刷新列表 
-                 show_article_list();
-             
-              },function(){alert('error')});
+        Modernizr.load({
+                    test:!((window.DocumentTouch&&document instanceof DocumentTouch)||'ontouchstart' in window),
+                    yep:"./Public/js/desktopBrowsers.js"
         });
-     
-   });
-      </script>
+    </script>
 </head>
 <body>
-        <a href="javascript:login('sina');" id="userinfo">新浪微博登陆</a>
-        <form id="add_article">
-            <input name="title" id="title" type="text" placeholder="标题" /><br />
-            <textarea name="content" id="content"></textarea><br />
-            <input name="cat_id" id="cat_id" type="text" placeholder="分类" /><br />
-            <button type="submit" class="btn btn-primary">发布</button>
-
-        </form>
-
-        <div id="article_list">
-            正在加载中...
+   <div id="menubar">
+        <div id="userinfo"  class="userinfo">
+            <img src="./logo.png" width="140" height="140"  />
+            <div class="name">TPMBBS</div>
+            <a href="javascript:login('sina')" class="btn-weibo">微博登陆</a>
+            <a href="javascript:login('qzone')" class="btn-qq">QQ登陆</a>
         </div>
-
-        <iframe src="http://bbs.avosapps.com/comment.html?id=1&title=xsdf" width="100%" height="1000px" frameborder="0"></iframe> 
-        <script id="article_tpl" type="text/html">
-          <empty name="lists">
-            暂未数据
-          <else />
-            <ul> 
-                <volist name="lists" id="vo">
-                    <li>标题：{$vo.title},内容:{$vo.content},分类：{$vo.cat_id},<a href="javascript:delete_article('{$vo.id}')">删除</a></li>
-                </volist>
-            </ul>
-          </empty>
+        <script id="userinfo_tpl" type="text/html">
+            <img src="{$avatar}"  />
+            <div class="name">{$username}</div>
+            <a href="javascript:publish();" class="btn-weibo">发布新帖</a>
+            <a href="javascript:loginout();" class="btn-qq">退出登录</a>
         </script>
+        <script id="userinfo_unlogin_tpl" type="text/html">
+            <img src="./logo.png" width="140" height="140"  />
+            <div class="name">TPMBBS</div>
+            <a href="javascript:login('sina')" class="btn-weibo">微博登陆</a>
+            <a href="javascript:login('qzone')" class="btn-qq">QQ登陆</a>
+        </script>
+       <div id="cat">
+        板块加载中...
+       </div>
+       <script id="cat_tpl" type="text/html">
+        <ul class="nav nav-list">
+          <li class="nav-header">论坛板块</li>
+          <volist name="cats" id="vo">
+          <li id="cat_{$key}"><a href="javascript:show_article_list_and_swipe('{$key}')">{$vo}</a></li>
+          </volist>
+        </ul>
+        </script>
+
+        <div class="copyright">Copyright © 2013 TPM</div>
+   </div> 
+   <div id="sidebar">
+       <div id="article_list">
+           正在加载中
+       </div>
+       <script id="article_list_tpl" type="text/html">
+       <ul class="unstyled article_list">
+       <empty name="lists">
+          暂时没有内容
+       <else />
+        <volist name="lists" id="vo">
+            <li class="clearfix">
+                <div class="pull-right">
+                    <img src="{$vo.avatar}" width="50" height="50" /><br />
+                    {$vo.username}
+                </div>
+                <div class="pull-left">
+                    <h4>{$vo.title}</h4>
+                    <div class="c">{$vo.content}</div>
+                </div>
+            </li>
+          </volist>
+         </empty>
+       </ul> 
+
+       </script>
+   </div> 
+   <div id="content">
+       <div class="article_content">
+           <div class="article_header">
+                <h4>
+                    标题
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                </h4>
+               <div class="avatar"> 
+                   <img src="./avatar.png" alt="用户名" /><br /> 
+                   luofei614
+               </div>   
+            </div>
+
+            <div class="c">
+                内容
+                内容
+                内容
+                内容
+                内容
+                内容
+               <br />
+              <div class="userinfo">作者：用户名 ， 时间：2013-9-2</div>
+            </div>
+            <div>
+                <iframe src="http://bbs.avosapps.com/comment.html?id=1&title=xsdf" width="100%" height="1000px" frameborder="0"></iframe>  
+            </div>
+       </div>
+   </div> 
+    <script id="publish_tpl" type="text/html">
+        <form id="add_article_form" method="post"> 
+           标题： <input type="text" name="title" value="" /> <br />
+           内容：<textarea name="content"></textarea><br />
+           选择板块：  
+           <select name="cat_id"> 
+                <volist name="cats" id="vo">
+                <option value="{$key}">{$vo}</option>
+                </volist>
+           </select>
+             <input type="button" value="ok" onclick="add_article()" /> 
+        </form>
+    </script>
 </body>
 </html>
