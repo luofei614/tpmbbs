@@ -160,17 +160,39 @@
 </script>
 
   <script id="publish_tpl" type="text/html">
-        <form id="add_article_form" method="post"> 
-           标题： <input type="text" name="title" value="" /> <br />
-           内容：<textarea name="content"></textarea><br />
-           选择板块：  
-           <select name="cat_id"> 
-                <volist name="cats" id="vo">
-                <option value="{$key}">{$vo}</option>
-                </volist>
-           </select>
-             <input type="button" value="ok" onclick="add_article()" /> 
+        <form  id="add_article_form"  class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label" for="inputitle">标题</label>
+            <div class="controls">
+              <input type="text" id="inputtitle" name="title">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="inputcontent">内容</label>
+            <div class="controls">
+                <textarea name="content" id="inputcontent" style="width:90%; height:150px;" ></textarea>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="inpucat_id">选择板块</label>
+            <div class="controls">
+               <select id="inputcat_id" name="cat_id"> 
+                    <volist name="cats" id="vo">
+                    <option value="{$key}">{$vo}</option>
+                    </volist>
+               </select>
+            </div>
+          </div>
+        
+        <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn" onclick="add_article()"  >发布</button>
+            </div>
+          </div>
         </form>
+
     </script>
 
 

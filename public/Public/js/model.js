@@ -50,7 +50,7 @@ var A=AV.Object.extend('article',{
                  username:articles[k].get('username'),
                  uid:articles[k].get('uid'),
                  cat_id:articles[k].get('cat_id'),
-                 content:articles[k].get('content'),
+                 content:articles[k].get('content').substr(0,20),
                  avatar:articles[k].get('avatar'),
                  createdAt:articles[k].createdAt
                });
