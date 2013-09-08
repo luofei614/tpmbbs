@@ -75,7 +75,7 @@ var A=AV.Object.extend('article',{
                 content:article.get('content'),
                 cat_id:article.get('cat_id'),
                 uid:article.get('uid'),
-                username:article.get('username'),
+                username:article.get('username').substr(0,5),
                 avatar:article.get('avatar'),
                 createdAt:article.createdAt
             }
