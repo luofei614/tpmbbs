@@ -65,7 +65,7 @@
        <else />
         <volist name="lists" id="vo">
             <li class="clearfix" id="li_{$vo.id}" onclick="show_article_and_swipe('{$vo.id}')">
-                <div class="pull-right">
+                <div class="pull-right" style="width:50px;">
                     <img src="{$vo.avatar}" width="50" height="50" /><br />
                     {$vo.username}
                 </div>
@@ -156,7 +156,7 @@
       <div class="userinfo"> 时间：{$datetime}</div>
     </div>
     <div>
-        <iframe src="http://tpmbbs.avosapps.com/comment.html?id={$id}&title={$title}" width="100%" height="1000px" frameborder="0"></iframe>  
+        <iframe src="http://tpmbbs.avosapps.com/comment.html?id={$id}&title={$title}"   width="100%" height="1000px" frameborder="0"></iframe>  
     </div>
  </div>
 </script>

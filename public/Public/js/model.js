@@ -34,6 +34,7 @@ var A=AV.Object.extend('article',{
         var totalPages=0;
         var query=new AV.Query('article');
         query.equalTo("cat_id",cat_id);
+        query.descending('createdAt');
         var count=query.count().then(function(count){
             totalPages=Math.ceil(count/pagesize); 
             if(page>totalPages) page=totalPages;
@@ -47,10 +48,10 @@ var A=AV.Object.extend('article',{
                lists.push({
                  id:articles[k].id,
                  title:articles[k].get('title'),
-                 username:articles[k].get('username'),
+                 username:articles[k].get('username').substr(0,5),
                  uid:articles[k].get('uid'),
                  cat_id:articles[k].get('cat_id'),
-                 content:articles[k].get('content').substr(0,20),
+                 content:articles[k].get('content').substr(0,15),
                  avatar:articles[k].get('avatar'),
                  createdAt:articles[k].createdAt
                });
